@@ -1,4 +1,4 @@
-const CACHE_NAME = "settings-app-v1";
+const CACHE_NAME = "settings-app-v2";
 
 const FILES = [
     "./",
@@ -34,8 +34,8 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
     event.respondWith(
-        caches.match(event.request).then((cachedResponse) => {
-            return cachedResponse || fetch(event.request);
+        caches.match(event.request).then((cached) => {
+            return cached || fetch(event.request);
         })
     );
 });
