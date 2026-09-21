@@ -1,4 +1,4 @@
-const CACHE_NAME = "settings-app-v7";
+const CACHE_NAME = "settings-app-v8";
 
 const FILES = [
     "./",
