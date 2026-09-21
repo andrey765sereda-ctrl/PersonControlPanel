@@ -19,11 +19,9 @@ function getSettings() {
 }
 
 function saveSettings() {
-    const settings = getSettings();
-
     localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify(settings)
+        JSON.stringify(getSettings())
     );
 }
 
@@ -51,16 +49,62 @@ function loadSettings() {
     }
 }
 
-mouthToggle.addEventListener(
-    "change",
-    saveSettings
-);
+function animateSwitch(input) {
+    const switchElement = input.closest(".switch");
+
+    if (!switchElement) {
+        return;
+    }
+
+    switchElement.classList.remove(
+        "animating",
+        "to-right",
+        "to-left",
+        "finish-right",
+        "finish-left"
+    );
+
+    void switchElement.offsetWidth;
+
+    const isTurningOn = input.checked;
+
+    switchElement.classList.add(
+        "animating",
+        isTurningOn ? "to-right" : "to-left"
+    );
+
+    setTimeout(() => {
+        switchElement.classList.remove(
+            "to-right",
+            "to-left"
+        );
+
+        switchElement.classList.add(
+            isTurningOn
+                ? "finish-right"
+                : "finish-left"
+        );
+    }, 230);
+
+    setTimeout(() => {
+        switchElement.classList.remove(
+            "animating",
+            "finish-right",
+            "finish-left"
+        );
+    }, 500);
+}
+
+mouthToggle.addEventListener("change", () => {
+    animateSwitch(mouthToggle);
+    saveSettings();
+});
 
 moodToggles.forEach((toggle) => {
-    toggle.addEventListener(
-        "change",
-        saveSettings
-    );
+    toggle.addEventListener("change", () => {
+        animateSwitch(toggle);
+        saveSettings();
+    });
 });
 
 loadSettings();
