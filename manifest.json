@@ -1,0 +1,11 @@
+{
+    "name": "Настройки",
+    "short_name": "Настройки",
+    "description": "Простое приложение с переключателями",
+    "start_url": "./",
+    "display": "standalone",
+    "background_color": "#0f0f10",
+    "theme_color": "#0f0f10",
+    "orientation": "portrait",
+    "lang": "ru"
+}
