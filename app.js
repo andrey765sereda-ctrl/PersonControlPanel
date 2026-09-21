@@ -35,8 +35,7 @@ function loadSettings() {
     try {
         const settings = JSON.parse(saved);
 
-        mouthToggle.checked =
-            settings.mouthDisabled === true;
+        mouthToggle.checked = settings.mouthDisabled === true;
 
         if (Array.isArray(settings.moods)) {
             moodToggles.forEach((toggle) => {
@@ -56,43 +55,21 @@ function animateSwitch(input) {
         return;
     }
 
-    switchElement.classList.remove(
-        "animating",
-        "to-right",
-        "to-left",
-        "finish-right",
-        "finish-left"
-    );
+    switchElement.classList.remove("switch-animation-on");
+    switchElement.classList.remove("switch-animation-off");
 
     void switchElement.offsetWidth;
 
-    const isTurningOn = input.checked;
-
-    switchElement.classList.add(
-        "animating",
-        isTurningOn ? "to-right" : "to-left"
-    );
-
-    setTimeout(() => {
-        switchElement.classList.remove(
-            "to-right",
-            "to-left"
-        );
-
-        switchElement.classList.add(
-            isTurningOn
-                ? "finish-right"
-                : "finish-left"
-        );
-    }, 230);
+    if (input.checked) {
+        switchElement.classList.add("switch-animation-on");
+    } else {
+        switchElement.classList.add("switch-animation-off");
+    }
 
     setTimeout(() => {
-        switchElement.classList.remove(
-            "animating",
-            "finish-right",
-            "finish-left"
-        );
-    }, 500);
+        switchElement.classList.remove("switch-animation-on");
+        switchElement.classList.remove("switch-animation-off");
+    }, 600);
 }
 
 mouthToggle.addEventListener("change", () => {
