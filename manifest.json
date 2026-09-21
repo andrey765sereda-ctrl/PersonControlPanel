@@ -1,11 +1,12 @@
 {
     "name": "Настройки",
     "short_name": "Настройки",
-    "description": "Простое приложение с переключателями",
+    "description": "Панель управления состояниями",
     "start_url": "./",
+    "scope": "./",
     "display": "standalone",
-    "background_color": "#0f0f10",
-    "theme_color": "#0f0f10",
+    "background_color": "#08080c",
+    "theme_color": "#0b0b0f",
     "orientation": "portrait",
     "lang": "ru"
 }
