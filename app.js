@@ -35,7 +35,8 @@ function loadSettings() {
     try {
         const settings = JSON.parse(saved);
 
-        mouthToggle.checked = settings.mouthDisabled === true;
+        mouthToggle.checked =
+            settings.mouthDisabled === true;
 
         if (Array.isArray(settings.moods)) {
             moodToggles.forEach((toggle) => {
@@ -55,32 +56,39 @@ function animateSwitch(input) {
         return;
     }
 
-    switchElement.classList.remove("switch-animation-on");
-    switchElement.classList.remove("switch-animation-off");
+    switchElement.classList.remove(
+        "animate-on",
+        "animate-off"
+    );
 
     void switchElement.offsetWidth;
 
-    if (input.checked) {
-        switchElement.classList.add("switch-animation-on");
-    } else {
-        switchElement.classList.add("switch-animation-off");
-    }
+    switchElement.classList.add(
+        input.checked
+            ? "animate-on"
+            : "animate-off"
+    );
 
     setTimeout(() => {
-        switchElement.classList.remove("switch-animation-on");
-        switchElement.classList.remove("switch-animation-off");
-    }, 600);
+        switchElement.classList.remove(
+            "animate-on",
+            "animate-off"
+        );
+    }, 520);
+}
+
+function handleToggle(input) {
+    animateSwitch(input);
+    saveSettings();
 }
 
 mouthToggle.addEventListener("change", () => {
-    animateSwitch(mouthToggle);
-    saveSettings();
+    handleToggle(mouthToggle);
 });
 
 moodToggles.forEach((toggle) => {
     toggle.addEventListener("change", () => {
-        animateSwitch(toggle);
-        saveSettings();
+        handleToggle(toggle);
     });
 });
 
