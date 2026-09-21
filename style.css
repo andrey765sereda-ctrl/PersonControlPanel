@@ -17,7 +17,7 @@ body {
     min-height: 100vh;
     min-height: 100dvh;
 
-    color: #ffffff;
+    color: white;
 
     font-family:
         -apple-system,
@@ -31,17 +31,17 @@ body {
     background:
         radial-gradient(
             circle at 15% 5%,
-            rgba(110, 130, 255, 0.20),
-            transparent 30%
+            rgba(130, 140, 255, 0.20),
+            transparent 32%
         ),
         radial-gradient(
             circle at 90% 25%,
-            rgba(210, 100, 255, 0.16),
+            rgba(220, 150, 255, 0.16),
             transparent 30%
         ),
         radial-gradient(
             circle at 45% 105%,
-            rgba(70, 190, 255, 0.12),
+            rgba(80, 190, 255, 0.12),
             transparent 35%
         ),
         #08080c;
@@ -54,15 +54,16 @@ body {
     overflow-x: hidden;
 }
 
-/* ================================
+/* =========================
    BACKGROUND
-================================ */
+========================= */
 
 .background {
     position: fixed;
     inset: 0;
 
     pointer-events: none;
+
     overflow: hidden;
 
     z-index: -1;
@@ -71,40 +72,40 @@ body {
 .glow {
     position: absolute;
 
-    width: 300px;
-    height: 300px;
+    width: 320px;
+    height: 320px;
 
     border-radius: 50%;
 
-    filter: blur(90px);
+    filter: blur(100px);
 
-    opacity: 0.18;
+    opacity: 0.16;
 }
 
 .glow-1 {
-    top: -120px;
-    left: -120px;
+    top: -130px;
+    left: -130px;
 
     background: #6878ff;
 }
 
 .glow-2 {
     top: 35%;
-    right: -140px;
+    right: -150px;
 
     background: #c86cff;
 }
 
 .glow-3 {
-    bottom: -160px;
+    bottom: -170px;
     left: 20%;
 
     background: #55baff;
 }
 
-/* ================================
-   MAIN CONTAINER
-================================ */
+/* =========================
+   CONTAINER
+========================= */
 
 .container {
     position: relative;
@@ -115,9 +116,9 @@ body {
     margin: 0 auto;
 }
 
-/* ================================
+/* =========================
    HEADER
-================================ */
+========================= */
 
 .header {
     display: flex;
@@ -147,8 +148,8 @@ body {
     background:
         linear-gradient(
             145deg,
-            rgba(255, 255, 255, 0.22),
-            rgba(255, 255, 255, 0.06)
+            rgba(255, 255, 255, 0.20),
+            rgba(255, 255, 255, 0.055)
         );
 
     border:
@@ -159,19 +160,19 @@ body {
         inset 0 1px 1px
         rgba(255, 255, 255, 0.30),
 
-        inset 0 -1px 1px
-        rgba(0, 0, 0, 0.10),
+        inset 0 -1px 2px
+        rgba(0, 0, 0, 0.12),
 
-        0 10px 35px
+        0 12px 35px
         rgba(0, 0, 0, 0.28);
 
     backdrop-filter:
-        blur(24px)
-        saturate(180%);
+        blur(26px)
+        saturate(190%);
 
     -webkit-backdrop-filter:
-        blur(24px)
-        saturate(180%);
+        blur(26px)
+        saturate(190%);
 
     font-size: 22px;
 
@@ -183,18 +184,18 @@ body {
 
     position: absolute;
 
-    top: 0;
+    top: 1px;
     left: 8px;
     right: 8px;
 
-    height: 9px;
+    height: 8px;
 
     border-radius: 999px;
 
     background:
         linear-gradient(
             180deg,
-            rgba(255, 255, 255, 0.38),
+            rgba(255, 255, 255, 0.42),
             transparent
         );
 
@@ -213,18 +214,17 @@ h1 {
 }
 
 .header p {
-    margin:
-        5px 0 0;
+    margin: 5px 0 0;
 
     color:
-        rgba(255, 255, 255, 0.55);
+        rgba(255, 255, 255, 0.52);
 
     font-size: 14px;
 }
 
-/* ================================
-   SECTIONS
-================================ */
+/* =========================
+   SECTION
+========================= */
 
 .section {
     margin-bottom: 28px;
@@ -239,6 +239,7 @@ h2 {
         rgba(255, 255, 255, 0.55);
 
     font-size: 13px;
+
     font-weight: 500;
 
     text-transform: uppercase;
@@ -246,9 +247,9 @@ h2 {
     letter-spacing: 0.4px;
 }
 
-/* ================================
+/* =========================
    LIQUID GLASS CARD
-================================ */
+========================= */
 
 .glass-card {
     position: relative;
@@ -260,8 +261,8 @@ h2 {
     background:
         linear-gradient(
             145deg,
-            rgba(255, 255, 255, 0.16),
-            rgba(255, 255, 255, 0.055)
+            rgba(255, 255, 255, 0.15),
+            rgba(255, 255, 255, 0.045)
         );
 
     border:
@@ -273,21 +274,19 @@ h2 {
         rgba(255, 255, 255, 0.20),
 
         inset 0 -1px 2px
-        rgba(0, 0, 0, 0.10),
+        rgba(0, 0, 0, 0.12),
 
         0 18px 50px
         rgba(0, 0, 0, 0.30);
 
     backdrop-filter:
-        blur(32px)
+        blur(34px)
         saturate(190%);
 
     -webkit-backdrop-filter:
-        blur(32px)
+        blur(34px)
         saturate(190%);
 }
-
-/* Верхний стеклянный блик */
 
 .glass-card::before {
     content: "";
@@ -311,23 +310,21 @@ h2 {
     pointer-events: none;
 }
 
-/* Мягкий внутренний блик */
-
 .glass-card::after {
     content: "";
 
     position: absolute;
 
-    top: -60px;
+    top: -70px;
     left: 10%;
 
     width: 80%;
-    height: 100px;
+    height: 110px;
 
     background:
         radial-gradient(
             ellipse,
-            rgba(255, 255, 255, 0.07),
+            rgba(255, 255, 255, 0.08),
             transparent 70%
         );
 
@@ -336,11 +333,15 @@ h2 {
     pointer-events: none;
 }
 
-/* ================================
-   SETTING ROW
-================================ */
+/* =========================
+   ROW
+========================= */
 
 .setting {
+    position: relative;
+
+    z-index: 1;
+
     min-height: 62px;
 
     display: flex;
@@ -352,32 +353,16 @@ h2 {
         0 18px;
 
     font-size: 17px;
-
-    position: relative;
-
-    z-index: 1;
-}
-
-.setting-text {
-    min-width: 0;
 }
 
 .title {
-    display: block;
-
     color:
-        rgba(255, 255, 255, 0.94);
+        rgba(255, 255, 255, 0.95);
 
     font-size: 17px;
 
     font-weight: 400;
-
-    letter-spacing: -0.1px;
 }
-
-/* ================================
-   DIVIDERS
-================================ */
 
 .divider {
     height: 1px;
@@ -385,16 +370,12 @@ h2 {
     margin-left: 18px;
 
     background:
-        linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 0.10),
-            rgba(255, 255, 255, 0.04)
-        );
+        rgba(255, 255, 255, 0.09);
 }
 
-/* ================================
+/* =========================
    LIQUID GLASS SWITCH
-================================ */
+========================= */
 
 .switch {
     position: relative;
@@ -418,7 +399,7 @@ h2 {
     opacity: 0;
 }
 
-/* Стеклянная капсула */
+/* Стеклянная основа */
 
 .slider {
     position: absolute;
@@ -432,31 +413,31 @@ h2 {
     background:
         linear-gradient(
             145deg,
-            rgba(255, 255, 255, 0.22),
-            rgba(255, 255, 255, 0.065)
+            rgba(255, 255, 255, 0.17),
+            rgba(255, 255, 255, 0.045)
         );
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.28);
+        rgba(255, 255, 255, 0.25);
 
     box-shadow:
-        inset 0 1px 1px
-        rgba(255, 255, 255, 0.38),
+        inset 0 1px 2px
+        rgba(255, 255, 255, 0.28),
 
-        inset 0 -1px 2px
+        inset 0 -2px 3px
         rgba(0, 0, 0, 0.20),
 
-        0 2px 9px
+        0 3px 10px
         rgba(0, 0, 0, 0.25);
 
     backdrop-filter:
-        blur(20px)
-        saturate(200%);
+        blur(18px)
+        saturate(190%);
 
     -webkit-backdrop-filter:
-        blur(20px)
-        saturate(200%);
+        blur(18px)
+        saturate(190%);
 
     transition:
         background 0.25s ease,
@@ -464,25 +445,25 @@ h2 {
         box-shadow 0.25s ease;
 }
 
-/* Блик внутри переключателя */
+/* Верхний блик */
 
 .slider::before {
     content: "";
 
     position: absolute;
 
-    top: 1px;
-    left: 8px;
-    right: 8px;
+    top: 2px;
+    left: 9px;
+    right: 9px;
 
-    height: 8px;
+    height: 7px;
 
     border-radius: 999px;
 
     background:
         linear-gradient(
             180deg,
-            rgba(255, 255, 255, 0.40),
+            rgba(255, 255, 255, 0.42),
             rgba(255, 255, 255, 0)
         );
 
@@ -491,7 +472,7 @@ h2 {
     pointer-events: none;
 }
 
-/* Стеклянный бегунок */
+/* Белый стеклянный шар */
 
 .slider::after {
     content: "";
@@ -508,81 +489,76 @@ h2 {
 
     background:
         radial-gradient(
-            circle at 35% 25%,
-            rgba(255, 255, 255, 0.99),
-            rgba(255, 255, 255, 0.78) 45%,
-            rgba(225, 225, 232, 0.58) 100%
+            circle at 33% 23%,
+            rgba(255, 255, 255, 1),
+            rgba(255, 255, 255, 0.92) 35%,
+            rgba(240, 240, 245, 0.78) 70%,
+            rgba(220, 220, 228, 0.62)
         );
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.70);
+        rgba(255, 255, 255, 0.82);
 
     box-shadow:
         inset 0 1px 2px
-        rgba(255, 255, 255, 0.95),
+        rgba(255, 255, 255, 1),
 
-        inset 0 -2px 3px
-        rgba(0, 0, 0, 0.12),
+        inset 0 -2px 4px
+        rgba(0, 0, 0, 0.10),
 
-        0 2px 7px
-        rgba(0, 0, 0, 0.34),
+        0 2px 8px
+        rgba(0, 0, 0, 0.38),
 
-        0 0 0 1px
-        rgba(255, 255, 255, 0.08);
-
-    backdrop-filter:
-        blur(12px)
-        saturate(180%);
-
-    -webkit-backdrop-filter:
-        blur(12px)
-        saturate(180%);
+        0 0 5px
+        rgba(255, 255, 255, 0.20);
 
     transition:
-        transform 0.30s
-        cubic-bezier(0.2, 0.8, 0.2, 1),
+        transform 0.32s
+        cubic-bezier(0.22, 0.8, 0.25, 1),
 
-        width 0.20s ease;
+        width 0.18s ease;
 }
 
-/* ================================
-   SWITCH ON
-================================ */
+/* =========================
+   ON STATE
+========================= */
 
 .switch input:checked + .slider {
     background:
         linear-gradient(
             145deg,
-            rgba(100, 215, 125, 0.78),
-            rgba(45, 190, 75, 0.48)
+            rgba(255, 255, 255, 0.24),
+            rgba(255, 255, 255, 0.07)
         );
 
     border-color:
         rgba(255, 255, 255, 0.34);
 
     box-shadow:
-        inset 0 1px 1px
+        inset 0 1px 2px
         rgba(255, 255, 255, 0.38),
 
-        inset 0 -1px 2px
-        rgba(0, 0, 0, 0.12),
+        inset 0 -2px 3px
+        rgba(0, 0, 0, 0.14),
 
-        0 0 18px
-        rgba(52, 199, 89, 0.24),
+        0 0 15px
+        rgba(255, 255, 255, 0.07),
 
         0 3px 10px
-        rgba(0, 0, 0, 0.20);
+        rgba(0, 0, 0, 0.22);
 }
+
+/* Шар переезжает вправо */
 
 .switch input:checked + .slider::after {
     transform:
         translateX(22px);
 }
 
-/* ================================
-   PRESS ANIMATION
-================================ */
+/* =========================
+   PRESS EFFECT
+========================= */
 
 .switch:active .slider::after {
     width: 31px;
@@ -593,53 +569,34 @@ h2 {
         translateX(19px);
 }
 
-/* ================================
+/* =========================
    FOCUS
-================================ */
+========================= */
 
 .switch input:focus-visible + .slider {
     box-shadow:
         0 0 0 3px
-        rgba(255, 255, 255, 0.16),
+        rgba(255, 255, 255, 0.14),
 
-        0 0 20px
-        rgba(100, 150, 255, 0.25);
+        0 0 18px
+        rgba(255, 255, 255, 0.12);
 }
 
-/* ================================
-   TOUCH
-================================ */
-
-@media (hover: hover) {
-
-    .glass-card {
-        transition:
-            transform 0.25s ease,
-            border-color 0.25s ease;
-    }
-
-    .glass-card:hover {
-        border-color:
-            rgba(255, 255, 255, 0.20);
-    }
-}
-
-/* ================================
+/* =========================
    REDUCED MOTION
-================================ */
+========================= */
 
 @media (prefers-reduced-motion: reduce) {
 
     .slider,
-    .slider::after,
-    .glass-card {
+    .slider::after {
         transition: none;
     }
 }
 
-/* ================================
+/* =========================
    SMALL IPHONES
-================================ */
+========================= */
 
 @media (max-width: 360px) {
 
