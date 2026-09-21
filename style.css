@@ -17,7 +17,7 @@ body {
     min-height: 100vh;
     min-height: 100dvh;
 
-    color: white;
+    color: #ffffff;
 
     font-family:
         -apple-system,
@@ -31,17 +31,17 @@ body {
     background:
         radial-gradient(
             circle at 15% 5%,
-            rgba(130, 140, 255, 0.20),
+            rgba(120, 135, 255, 0.20),
             transparent 32%
         ),
         radial-gradient(
             circle at 90% 25%,
-            rgba(220, 150, 255, 0.16),
+            rgba(210, 110, 255, 0.15),
             transparent 30%
         ),
         radial-gradient(
             circle at 45% 105%,
-            rgba(80, 190, 255, 0.12),
+            rgba(70, 190, 255, 0.12),
             transparent 35%
         ),
         #08080c;
@@ -53,10 +53,6 @@ body {
 
     overflow-x: hidden;
 }
-
-/* =========================
-   BACKGROUND
-========================= */
 
 .background {
     position: fixed;
@@ -103,10 +99,6 @@ body {
     background: #55baff;
 }
 
-/* =========================
-   CONTAINER
-========================= */
-
 .container {
     position: relative;
 
@@ -115,10 +107,6 @@ body {
 
     margin: 0 auto;
 }
-
-/* =========================
-   HEADER
-========================= */
 
 .header {
     display: flex;
@@ -222,10 +210,6 @@ h1 {
     font-size: 14px;
 }
 
-/* =========================
-   SECTION
-========================= */
-
 .section {
     margin-bottom: 28px;
 }
@@ -246,10 +230,6 @@ h2 {
 
     letter-spacing: 0.4px;
 }
-
-/* =========================
-   LIQUID GLASS CARD
-========================= */
 
 .glass-card {
     position: relative;
@@ -333,10 +313,6 @@ h2 {
     pointer-events: none;
 }
 
-/* =========================
-   ROW
-========================= */
-
 .setting {
     position: relative;
 
@@ -373,9 +349,9 @@ h2 {
         rgba(255, 255, 255, 0.09);
 }
 
-/* =========================
+/* =================================
    LIQUID GLASS SWITCH
-========================= */
+================================= */
 
 .switch {
     position: relative;
@@ -388,6 +364,8 @@ h2 {
     display: block;
 
     cursor: pointer;
+
+    touch-action: manipulation;
 }
 
 .switch input {
@@ -399,14 +377,14 @@ h2 {
     opacity: 0;
 }
 
-/* Стеклянная основа */
+/* Основа переключателя */
 
 .slider {
     position: absolute;
 
     inset: 0;
 
-    overflow: hidden;
+    overflow: visible;
 
     border-radius: 999px;
 
@@ -440,9 +418,8 @@ h2 {
         saturate(190%);
 
     transition:
-        background 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
+        background 0.35s ease,
+        border-color 0.35s ease;
 }
 
 /* Верхний блик */
@@ -472,7 +449,9 @@ h2 {
     pointer-events: none;
 }
 
-/* Белый стеклянный шар */
+/* =================================
+   БЕЛЫЙ ШАР
+================================= */
 
 .slider::after {
     content: "";
@@ -491,14 +470,14 @@ h2 {
         radial-gradient(
             circle at 33% 23%,
             rgba(255, 255, 255, 1),
-            rgba(255, 255, 255, 0.92) 35%,
-            rgba(240, 240, 245, 0.78) 70%,
-            rgba(220, 220, 228, 0.62)
+            rgba(255, 255, 255, 0.94) 35%,
+            rgba(240, 240, 245, 0.80) 70%,
+            rgba(220, 220, 228, 0.65)
         );
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.82);
+        rgba(255, 255, 255, 0.85);
 
     box-shadow:
         inset 0 1px 2px
@@ -510,68 +489,185 @@ h2 {
         0 2px 8px
         rgba(0, 0, 0, 0.38),
 
-        0 0 5px
+        0 0 6px
         rgba(255, 255, 255, 0.20);
 
-    transition:
-        transform 0.32s
-        cubic-bezier(0.22, 0.8, 0.25, 1),
+    backdrop-filter:
+        blur(12px)
+        saturate(180%);
 
-        width 0.18s ease;
+    -webkit-backdrop-filter:
+        blur(12px)
+        saturate(180%);
+
+    transform-origin: center;
+
+    transition:
+        transform 0.42s cubic-bezier(0.22, 0.8, 0.25, 1),
+        width 0.20s ease,
+        height 0.20s ease,
+        border-radius 0.20s ease,
+        background 0.22s ease,
+        box-shadow 0.22s ease;
 }
 
-/* =========================
-   ON STATE
-========================= */
+/* =================================
+   LIQUID GLASS TRANSITION
+================================= */
 
-.switch input:checked + .slider {
+/*
+   Фаза 1:
+   шар становится прозрачным
+*/
+
+.switch.animating .slider::after {
+    width: 34px;
+    height: 26px;
+
+    border-radius: 45%;
+
     background:
         linear-gradient(
             145deg,
-            rgba(255, 255, 255, 0.24),
-            rgba(255, 255, 255, 0.07)
+            rgba(255, 255, 255, 0.22),
+            rgba(255, 255, 255, 0.06)
         );
 
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.42);
+
+    box-shadow:
+        inset 0 1px 2px
+        rgba(255, 255, 255, 0.65),
+
+        inset 0 -2px 4px
+        rgba(0, 0, 0, 0.08),
+
+        0 2px 12px
+        rgba(255, 255, 255, 0.10);
+
+    backdrop-filter:
+        blur(18px)
+        saturate(220%);
+
+    -webkit-backdrop-filter:
+        blur(18px)
+        saturate(220%);
+}
+
+/* =================================
+   ДВИЖЕНИЕ ВПРАВО
+================================= */
+
+.switch.animating.to-right .slider::after {
+    transform:
+        translateX(22px)
+        scaleX(1.28)
+        scaleY(0.93);
+}
+
+/* =================================
+   ДВИЖЕНИЕ ВЛЕВО
+================================= */
+
+.switch.animating.to-left .slider::after {
+    transform:
+        translateX(0)
+        scaleX(1.28)
+        scaleY(0.93);
+}
+
+/* =================================
+   ВОЗВРАТ К БЕЛОМУ ШАРУ
+================================= */
+
+.switch.animating.finish-right .slider::after {
+    transform:
+        translateX(22px)
+        scaleX(1)
+        scaleY(1);
+
+    background:
+        radial-gradient(
+            circle at 33% 23%,
+            rgba(255, 255, 255, 1),
+            rgba(255, 255, 255, 0.94) 35%,
+            rgba(240, 240, 245, 0.80) 70%,
+            rgba(220, 220, 228, 0.65)
+        );
+
+    border-color:
+        rgba(255, 255, 255, 0.85);
+
+    box-shadow:
+        inset 0 1px 2px
+        rgba(255, 255, 255, 1),
+
+        inset 0 -2px 4px
+        rgba(0, 0, 0, 0.10),
+
+        0 2px 8px
+        rgba(0, 0, 0, 0.38),
+
+        0 0 6px
+        rgba(255, 255, 255, 0.20);
+}
+
+.switch.animating.finish-left .slider::after {
+    transform:
+        translateX(0)
+        scaleX(1)
+        scaleY(1);
+
+    background:
+        radial-gradient(
+            circle at 33% 23%,
+            rgba(255, 255, 255, 1),
+            rgba(255, 255, 255, 0.94) 35%,
+            rgba(240, 240, 245, 0.80) 70%,
+            rgba(220, 220, 228, 0.65)
+        );
+
+    border-color:
+        rgba(255, 255, 255, 0.85);
+
+    box-shadow:
+        inset 0 1px 2px
+        rgba(255, 255, 255, 1),
+
+        inset 0 -2px 4px
+        rgba(0, 0, 0, 0.10),
+
+        0 2px 8px
+        rgba(0, 0, 0, 0.38),
+
+        0 0 6px
+        rgba(255, 255, 255, 0.20);
+}
+
+/* =================================
+   САМАЯ АККУРАТНАЯ ФАЗА
+================================= */
+
+.switch.animating .slider {
     border-color:
         rgba(255, 255, 255, 0.34);
 
     box-shadow:
         inset 0 1px 2px
-        rgba(255, 255, 255, 0.38),
+        rgba(255, 255, 255, 0.34),
 
         inset 0 -2px 3px
-        rgba(0, 0, 0, 0.14),
+        rgba(0, 0, 0, 0.16),
 
-        0 0 15px
-        rgba(255, 255, 255, 0.07),
-
-        0 3px 10px
-        rgba(0, 0, 0, 0.22);
+        0 3px 14px
+        rgba(255, 255, 255, 0.07);
 }
 
-/* Шар переезжает вправо */
-
-.switch input:checked + .slider::after {
-    transform:
-        translateX(22px);
-}
-
-/* =========================
-   PRESS EFFECT
-========================= */
-
-.switch:active .slider::after {
-    width: 31px;
-}
-
-.switch input:checked:active .slider::after {
-    transform:
-        translateX(19px);
-}
-
-/* =========================
+/* =================================
    FOCUS
-========================= */
+================================= */
 
 .switch input:focus-visible + .slider {
     box-shadow:
@@ -582,21 +678,9 @@ h2 {
         rgba(255, 255, 255, 0.12);
 }
 
-/* =========================
-   REDUCED MOTION
-========================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    .slider,
-    .slider::after {
-        transition: none;
-    }
-}
-
-/* =========================
-   SMALL IPHONES
-========================= */
+/* =================================
+   MOBILE
+================================= */
 
 @media (max-width: 360px) {
 
@@ -612,5 +696,17 @@ h2 {
     .setting {
         padding-left: 15px;
         padding-right: 14px;
+    }
+}
+
+/* =================================
+   REDUCED MOTION
+================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .slider,
+    .slider::after {
+        transition: none;
     }
 }
