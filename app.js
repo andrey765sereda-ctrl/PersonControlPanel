@@ -1,20 +1,36 @@
-const mouthToggle = document.getElementById("mouthToggle");
-const moodToggles = document.querySelectorAll(".mood-toggle");
+const allToggles = document.querySelectorAll(
+    ".behavior-toggle, .mood-toggle, .action-toggle"
+);
 
 const STORAGE_KEY = "settings-app";
 
 function getSettings() {
+    const behaviors = [];
     const moods = [];
+    const actions = [];
 
-    moodToggles.forEach((toggle) => {
+    document.querySelectorAll(".behavior-toggle").forEach((toggle) => {
+        if (toggle.checked) {
+            behaviors.push(toggle.value);
+        }
+    });
+
+    document.querySelectorAll(".mood-toggle").forEach((toggle) => {
         if (toggle.checked) {
             moods.push(toggle.value);
         }
     });
 
+    document.querySelectorAll(".action-toggle").forEach((toggle) => {
+        if (toggle.checked) {
+            actions.push(toggle.value);
+        }
+    });
+
     return {
-        mouthDisabled: mouthToggle.checked,
-        moods: moods
+        behaviors,
+        moods,
+        actions
     };
 }
 
@@ -35,15 +51,27 @@ function loadSettings() {
     try {
         const settings = JSON.parse(saved);
 
-        mouthToggle.checked =
-            settings.mouthDisabled === true;
+        if (Array.isArray(settings.behaviors)) {
+            document.querySelectorAll(".behavior-toggle").forEach((toggle) => {
+                toggle.checked =
+                    settings.behaviors.includes(toggle.value);
+            });
+        }
 
         if (Array.isArray(settings.moods)) {
-            moodToggles.forEach((toggle) => {
+            document.querySelectorAll(".mood-toggle").forEach((toggle) => {
                 toggle.checked =
                     settings.moods.includes(toggle.value);
             });
         }
+
+        if (Array.isArray(settings.actions)) {
+            document.querySelectorAll(".action-toggle").forEach((toggle) => {
+                toggle.checked =
+                    settings.actions.includes(toggle.value);
+            });
+        }
+
     } catch {
         localStorage.removeItem(STORAGE_KEY);
     }
@@ -74,21 +102,13 @@ function animateSwitch(input) {
             "animate-on",
             "animate-off"
         );
-    }, 440);
+    }, 520);
 }
 
-function handleToggle(input) {
-    animateSwitch(input);
-    saveSettings();
-}
-
-mouthToggle.addEventListener("change", () => {
-    handleToggle(mouthToggle);
-});
-
-moodToggles.forEach((toggle) => {
+allToggles.forEach((toggle) => {
     toggle.addEventListener("change", () => {
-        handleToggle(toggle);
+        animateSwitch(toggle);
+        saveSettings();
     });
 });
 
