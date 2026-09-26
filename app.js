@@ -1,80 +1,328 @@
-const allToggles = document.querySelectorAll(
-    ".behavior-toggle, .mood-toggle, .action-toggle"
-);
-
-const saveButton =
-    document.getElementById("saveButton");
+const WORKER_URL =
+    "https://ТВОЙ-WORKER.workers.dev";
 
 
 const STORAGE_KEY =
     "settings-app";
 
 
-/*
- * СЮДА ПОТОМ ВСТАВИТЬ
- * АДРЕС CLOUDFLARE WORKER
- */
-
-const WORKER_URL =
-    "https://andrey-settings.andrey-765-sereda.workers.dev";
+const SESSION_KEY =
+    "settings-session";
 
 
-/* ПОЛУЧЕНИЕ НАСТРОЕК */
+const allToggles =
+    document.querySelectorAll(
+        ".behavior-toggle, .mood-toggle, .action-toggle"
+    );
+
+
+const loginScreen =
+    document.getElementById(
+        "loginScreen"
+    );
+
+
+const loginForm =
+    document.getElementById(
+        "loginForm"
+    );
+
+
+const passwordInput =
+    document.getElementById(
+        "passwordInput"
+    );
+
+
+const loginError =
+    document.getElementById(
+        "loginError"
+    );
+
+
+const app =
+    document.getElementById(
+        "app"
+    );
+
+
+const saveButton =
+    document.getElementById(
+        "saveButton"
+    );
+
+
+const logoutButton =
+    document.getElementById(
+        "logoutButton"
+    );
+
+
+/* =========================
+   SESSION
+========================= */
+
+function getSession() {
+
+    return localStorage.getItem(
+        SESSION_KEY
+    );
+
+}
+
+
+function setSession(
+    token
+) {
+
+    localStorage.setItem(
+        SESSION_KEY,
+        token
+    );
+
+}
+
+
+function clearSession() {
+
+    localStorage.removeItem(
+        SESSION_KEY
+    );
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+async function login(
+    password
+) {
+
+    const response =
+        await fetch(
+            WORKER_URL,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body:
+                    JSON.stringify({
+                        action:
+                            "login",
+
+                        password:
+                            password
+                    })
+            }
+        );
+
+
+    const result =
+        await response.json();
+
+
+    if (
+        !response.ok ||
+        !result.ok
+    ) {
+
+        throw new Error(
+            result.error ||
+            "Ошибка авторизации"
+        );
+
+    }
+
+
+    setSession(
+        result.token
+    );
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logout() {
+
+    clearSession();
+
+    app.classList.add(
+        "app-hidden"
+    );
+
+    loginScreen.classList.remove(
+        "login-hidden"
+    );
+
+    passwordInput.value = "";
+
+    loginError.textContent = "";
+
+    passwordInput.focus();
+
+}
+
+
+/* =========================
+   SHOW APP
+========================= */
+
+function showApp() {
+
+    loginScreen.classList.add(
+        "login-hidden"
+    );
+
+    app.classList.remove(
+        "app-hidden"
+    );
+
+    loadSettings();
+
+}
+
+
+/* =========================
+   LOGIN FORM
+========================= */
+
+loginForm.addEventListener(
+    "submit",
+    async (event) => {
+
+        event.preventDefault();
+
+
+        const password =
+            passwordInput.value;
+
+
+        if (!password) {
+            return;
+        }
+
+
+        loginError.textContent =
+            "Проверка...";
+
+
+        try {
+
+            await login(
+                password
+            );
+
+
+            passwordInput.value =
+                "";
+
+
+            loginError.textContent =
+                "";
+
+
+            showApp();
+
+
+        } catch (error) {
+
+            loginError.textContent =
+                "Неверный пароль";
+
+            passwordInput.select();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   GET SETTINGS
+========================= */
 
 function getSettings() {
 
     const behaviors = [];
+
     const moods = [];
+
     const actions = [];
 
 
     document
-        .querySelectorAll(".behavior-toggle")
-        .forEach((toggle) => {
+        .querySelectorAll(
+            ".behavior-toggle"
+        )
+        .forEach(
+            toggle => {
 
-            if (toggle.checked) {
+                if (
+                    toggle.checked
+                ) {
 
-                behaviors.push(
-                    toggle.value
-                );
+                    behaviors.push(
+                        toggle.value
+                    );
+
+                }
 
             }
-
-        });
+        );
 
 
     document
-        .querySelectorAll(".mood-toggle")
-        .forEach((toggle) => {
+        .querySelectorAll(
+            ".mood-toggle"
+        )
+        .forEach(
+            toggle => {
 
-            if (toggle.checked) {
+                if (
+                    toggle.checked
+                ) {
 
-                moods.push(
-                    toggle.value
-                );
+                    moods.push(
+                        toggle.value
+                    );
+
+                }
 
             }
-
-        });
+        );
 
 
     document
-        .querySelectorAll(".action-toggle")
-        .forEach((toggle) => {
+        .querySelectorAll(
+            ".action-toggle"
+        )
+        .forEach(
+            toggle => {
 
-            if (toggle.checked) {
+                if (
+                    toggle.checked
+                ) {
 
-                actions.push(
-                    toggle.value
-                );
+                    actions.push(
+                        toggle.value
+                    );
+
+                }
 
             }
-
-        });
+        );
 
 
     return {
-
         behaviors:
             behaviors,
 
@@ -83,28 +331,26 @@ function getSettings() {
 
         actions:
             actions
-
     };
+
 }
 
 
-/* ЛОКАЛЬНОЕ СОХРАНЕНИЕ */
+/* =========================
+   LOCAL STORAGE
+========================= */
 
-function saveSettings() {
+function saveLocalSettings() {
 
     localStorage.setItem(
-
         STORAGE_KEY,
-
         JSON.stringify(
             getSettings()
         )
-
     );
+
 }
 
-
-/* ЗАГРУЗКА */
 
 function loadSettings() {
 
@@ -135,14 +381,17 @@ function loadSettings() {
                 .querySelectorAll(
                     ".behavior-toggle"
                 )
-                .forEach((toggle) => {
+                .forEach(
+                    toggle => {
 
-                    toggle.checked =
-                        settings.behaviors.includes(
-                            toggle.value
-                        );
+                        toggle.checked =
+                            settings.behaviors
+                                .includes(
+                                    toggle.value
+                                );
 
-                });
+                    }
+                );
 
         }
 
@@ -157,14 +406,17 @@ function loadSettings() {
                 .querySelectorAll(
                     ".mood-toggle"
                 )
-                .forEach((toggle) => {
+                .forEach(
+                    toggle => {
 
-                    toggle.checked =
-                        settings.moods.includes(
-                            toggle.value
-                        );
+                        toggle.checked =
+                            settings.moods
+                                .includes(
+                                    toggle.value
+                                );
 
-                });
+                    }
+                );
 
         }
 
@@ -179,14 +431,17 @@ function loadSettings() {
                 .querySelectorAll(
                     ".action-toggle"
                 )
-                .forEach((toggle) => {
+                .forEach(
+                    toggle => {
 
-                    toggle.checked =
-                        settings.actions.includes(
-                            toggle.value
-                        );
+                        toggle.checked =
+                            settings.actions
+                                .includes(
+                                    toggle.value
+                                );
 
-                });
+                    }
+                );
 
         }
 
@@ -197,15 +452,22 @@ function loadSettings() {
         );
 
     }
+
 }
 
 
-/* АНИМАЦИЯ ПЕРЕКЛЮЧАТЕЛЯ */
+/* =========================
+   SWITCH ANIMATION
+========================= */
 
-function animateSwitch(input) {
+function animateSwitch(
+    input
+) {
 
     const switchElement =
-        input.closest(".switch");
+        input.closest(
+            ".switch"
+        );
 
 
     if (!switchElement) {
@@ -223,214 +485,250 @@ function animateSwitch(input) {
 
 
     switchElement.classList.add(
-
         input.checked
             ? "animate-on"
             : "animate-off"
-
     );
 
 
-    setTimeout(() => {
+    setTimeout(
+        () => {
 
-        switchElement.classList.remove(
-            "animate-on",
-            "animate-off"
-        );
+            switchElement.classList.remove(
+                "animate-on",
+                "animate-off"
+            );
 
-    }, 520);
+        },
+        520
+    );
+
 }
 
 
-/* ПЕРЕКЛЮЧАТЕЛИ */
+/* =========================
+   SWITCHES
+========================= */
 
-allToggles.forEach((toggle) => {
+allToggles.forEach(
+    toggle => {
 
-    toggle.addEventListener(
-        "change",
-        () => {
+        toggle.addEventListener(
+            "change",
+            () => {
 
-            animateSwitch(toggle);
+                animateSwitch(
+                    toggle
+                );
 
-            saveSettings();
+                saveLocalSettings();
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================
+   SAVE TO TELEGRAM
+========================= */
+
+saveButton.addEventListener(
+    "click",
+    async () => {
+
+        const token =
+            getSession();
+
+
+        if (!token) {
+
+            logout();
+
+            return;
 
         }
-    );
-
-});
 
 
-/* КНОПКА СОХРАНИТЬ */
+        const settings =
+            getSettings();
 
-if (saveButton) {
 
-    saveButton.addEventListener(
-        "click",
-        async () => {
+        saveLocalSettings();
+
+
+        saveButton.disabled =
+            true;
+
+
+        saveButton.textContent =
+            "Отправка...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    WORKER_URL,
+                    {
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json",
+
+                            "Authorization":
+                                "Bearer " +
+                                token
+
+                        },
+
+                        body:
+                            JSON.stringify({
+
+                                action:
+                                    "save",
+
+                                settings:
+                                    settings
+
+                            })
+
+                    }
+                );
+
+
+            const result =
+                await response.json();
+
 
             if (
-                !WORKER_URL ||
-                WORKER_URL.includes(
-                    "ТВОЙ-WORKER"
-                )
+                response.status ===
+                401
             ) {
 
+                logout();
+
                 alert(
-                    "Сначала укажи адрес Cloudflare Worker в app.js"
+                    "Сессия истекла. Войдите снова."
                 );
 
                 return;
+
             }
 
 
-            const settings =
-                getSettings();
+            if (
+                !response.ok ||
+                !result.ok
+            ) {
+
+                throw new Error(
+                    result.error ||
+                    "Ошибка отправки"
+                );
+
+            }
 
 
-            saveSettings();
-
-
-            saveButton.disabled =
-                true;
-
-
-            saveButton.classList.remove(
+            saveButton.classList.add(
                 "saved"
             );
 
-
-            const buttonText =
-                saveButton.querySelector(
-                    ".save-button-text"
-                );
+            saveButton.textContent =
+                "Сохранено";
 
 
-            if (buttonText) {
-
-                buttonText.textContent =
-                    "Отправка...";
-
-            }
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        WORKER_URL,
-                        {
-                            method:
-                                "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body:
-                                JSON.stringify(
-                                    settings
-                                )
-                        }
-                    );
-
-
-                const result =
-                    await response.json();
-
-
-                if (
-                    !response.ok ||
-                    !result.ok
-                ) {
-
-                    throw new Error(
-                        "Telegram request failed"
-                    );
-
-                }
-
-
-                saveButton.classList.add(
-                    "saved"
-                );
-
-
-                if (buttonText) {
-
-                    buttonText.textContent =
-                        "Сохранено";
-
-                }
-
-
-                setTimeout(() => {
+            setTimeout(
+                () => {
 
                     saveButton.classList.remove(
                         "saved"
                     );
 
+                    saveButton.textContent =
+                        "Сохранить";
 
-                    if (buttonText) {
-
-                        buttonText.textContent =
-                            "Сохранить";
-
-                    }
-
-                }, 1200);
+                },
+                1200
+            );
 
 
-            } catch (error) {
+        } catch (error) {
 
-                console.error(
-                    error
-                );
-
-
-                if (buttonText) {
-
-                    buttonText.textContent =
-                        "Ошибка";
-
-                }
+            console.error(
+                error
+            );
 
 
-                setTimeout(() => {
-
-                    if (buttonText) {
-
-                        buttonText.textContent =
-                            "Сохранить";
-
-                    }
-
-                }, 1500);
+            saveButton.textContent =
+                "Ошибка";
 
 
-                alert(
-                    "Не удалось отправить настройки в Telegram."
-                );
+            alert(
+                "Не удалось отправить настройки."
+            );
 
-            } finally {
 
-                saveButton.disabled =
-                    false;
+            setTimeout(
+                () => {
 
-            }
+                    saveButton.textContent =
+                        "Сохранить";
+
+                },
+                1500
+            );
+
+        } finally {
+
+            saveButton.disabled =
+                false;
 
         }
+
+    }
+);
+
+
+/* =========================
+   LOGOUT BUTTON
+========================= */
+
+logoutButton.addEventListener(
+    "click",
+    logout
+);
+
+
+/* =========================
+   START
+========================= */
+
+if (getSession()) {
+
+    showApp();
+
+} else {
+
+    app.classList.add(
+        "app-hidden"
     );
+
+    loginScreen.classList.remove(
+        "login-hidden"
+    );
+
+    passwordInput.focus();
 
 }
 
 
-/* ЗАПУСК */
-
-loadSettings();
-
-
-/* SERVICE WORKER */
+/* =========================
+   SERVICE WORKER
+========================= */
 
 if (
     "serviceWorker" in navigator
