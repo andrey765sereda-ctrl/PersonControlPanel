@@ -1,5 +1,5 @@
 const WORKER_URL =
-    "https://ТВОЙ-WORKER.workers.dev";
+    "https://andrey-settings.andrey-765-sereda.workers.dev";
 
 
 const STORAGE_KEY =
