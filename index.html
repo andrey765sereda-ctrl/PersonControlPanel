@@ -26,10 +26,10 @@
 
     <meta
         name="apple-mobile-web-app-title"
-        content="Настройки"
+        content="Настройки Андрея"
     >
 
-    <title>Настройки</title>
+    <title>Настройки Андрея</title>
 
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
@@ -46,44 +46,99 @@
     <main class="container">
 
         <header class="header">
-
-            <div class="header-icon">
-                ✦
-            </div>
-
-            <div>
-                <h1>Настройки</h1>
-                <p>Управление состояниями</p>
-            </div>
-
+            <h1>Настройки Андрея</h1>
         </header>
 
 
-        <!-- ДЕЙСТВИЯ -->
+        <!-- ПОВЕДЕНИЕ -->
 
         <section class="section">
 
-            <h2>Действия</h2>
+            <h2>Поведение</h2>
 
             <div class="glass-card">
 
                 <div class="setting">
-
                     <div class="setting-text">
-                        <span class="title">Выключить рот</span>
+                        <span class="title">Ласковый</span>
                     </div>
 
                     <label class="switch">
-
                         <input
                             type="checkbox"
-                            id="mouthToggle"
+                            class="behavior-toggle"
+                            value="gentle"
                         >
-
                         <span class="slider"></span>
-
                     </label>
+                </div>
 
+                <div class="divider"></div>
+
+                <div class="setting">
+                    <div class="setting-text">
+                        <span class="title">Грубый</span>
+                    </div>
+
+                    <label class="switch">
+                        <input
+                            type="checkbox"
+                            class="behavior-toggle"
+                            value="rough"
+                        >
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="setting">
+                    <div class="setting-text">
+                        <span class="title">Жёсткий</span>
+                    </div>
+
+                    <label class="switch">
+                        <input
+                            type="checkbox"
+                            class="behavior-toggle"
+                            value="hard"
+                        >
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="setting">
+                    <div class="setting-text">
+                        <span class="title">Доминантный</span>
+                    </div>
+
+                    <label class="switch">
+                        <input
+                            type="checkbox"
+                            class="behavior-toggle"
+                            value="dominant"
+                        >
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="setting">
+                    <div class="setting-text">
+                        <span class="title">Внимательный</span>
+                    </div>
+
+                    <label class="switch">
+                        <input
+                            type="checkbox"
+                            class="behavior-toggle"
+                            value="attentive"
+                        >
+                        <span class="slider"></span>
+                    </label>
                 </div>
 
             </div>
@@ -100,191 +155,166 @@
             <div class="glass-card">
 
                 <div class="setting">
-
                     <div class="setting-text">
                         <span class="title">Весёлый</span>
                     </div>
 
                     <label class="switch">
-
                         <input
                             type="checkbox"
                             class="mood-toggle"
                             value="happy"
                         >
-
                         <span class="slider"></span>
-
                     </label>
-
                 </div>
-
 
                 <div class="divider"></div>
 
-
                 <div class="setting">
-
                     <div class="setting-text">
                         <span class="title">Грустный</span>
                     </div>
 
                     <label class="switch">
-
                         <input
                             type="checkbox"
                             class="mood-toggle"
                             value="sad"
                         >
-
                         <span class="slider"></span>
-
                     </label>
-
                 </div>
-
 
                 <div class="divider"></div>
 
-
                 <div class="setting">
-
                     <div class="setting-text">
                         <span class="title">Ситуативный</span>
                     </div>
 
                     <label class="switch">
-
                         <input
                             type="checkbox"
                             class="mood-toggle"
                             value="situational"
                         >
-
                         <span class="slider"></span>
-
                     </label>
-
                 </div>
-
 
                 <div class="divider"></div>
 
-
                 <div class="setting">
-
                     <div class="setting-text">
                         <span class="title">Добрый</span>
                     </div>
 
                     <label class="switch">
-
                         <input
                             type="checkbox"
                             class="mood-toggle"
                             value="kind"
                         >
-
                         <span class="slider"></span>
-
                     </label>
-
                 </div>
-
 
                 <div class="divider"></div>
 
-
                 <div class="setting">
-
                     <div class="setting-text">
                         <span class="title">Любящий</span>
                     </div>
 
                     <label class="switch">
-
                         <input
                             type="checkbox"
                             class="mood-toggle"
                             value="loving"
                         >
-
                         <span class="slider"></span>
-
                     </label>
-
                 </div>
 
+            </div>
 
-                <div class="divider"></div>
+        </section>
 
+
+        <!-- ДЕЙСТВИЕ -->
+
+        <section class="section">
+
+            <h2>Действие</h2>
+
+            <div class="glass-card">
 
                 <div class="setting">
-
                     <div class="setting-text">
                         <span class="title">Мозг 200%</span>
                     </div>
 
                     <label class="switch">
-
                         <input
                             type="checkbox"
-                            class="mood-toggle"
+                            class="action-toggle"
                             value="brain200"
                         >
-
                         <span class="slider"></span>
-
                     </label>
-
                 </div>
-
 
                 <div class="divider"></div>
 
-
                 <div class="setting">
-
                     <div class="setting-text">
                         <span class="title">Концентрация</span>
                     </div>
 
                     <label class="switch">
-
                         <input
                             type="checkbox"
-                            class="mood-toggle"
+                            class="action-toggle"
                             value="concentration"
                         >
-
                         <span class="slider"></span>
-
                     </label>
-
                 </div>
-
 
                 <div class="divider"></div>
 
-
                 <div class="setting">
-
                     <div class="setting-text">
                         <span class="title">Работа</span>
                     </div>
 
                     <label class="switch">
-
                         <input
                             type="checkbox"
-                            class="mood-toggle"
+                            class="action-toggle"
                             value="work"
                         >
-
                         <span class="slider"></span>
-
                     </label>
+                </div>
 
+                <div class="divider"></div>
+
+                <div class="setting">
+                    <div class="setting-text">
+                        <span class="title">Выключить рот</span>
+                    </div>
+
+                    <label class="switch">
+                        <input
+                            type="checkbox"
+                            class="action-toggle"
+                            value="mouthDisabled"
+                            id="mouthToggle"
+                        >
+                        <span class="slider"></span>
+                    </label>
                 </div>
 
             </div>
@@ -292,7 +322,6 @@
         </section>
 
     </main>
-
 
     <script src="app.js"></script>
 
